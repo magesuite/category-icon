@@ -21,8 +21,6 @@ class CategoryIcon extends \Magento\Framework\App\Helper\AbstractHelper
      */
     public function getUrl(\Magento\Catalog\Model\Category $category)
     {
-        $url = null;
-
         $imagePath = $category->getCategoryIcon();
 
         if (!$imagePath) {
