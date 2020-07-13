@@ -36,3 +36,21 @@ $category
     ->setIncludeInMenu(0)
     ->setCategoryIcon('icon.png')
     ->save();
+
+$category = $objectManager->create(\Magento\Catalog\Model\Category::class);
+$category->isObjectNew(true);
+$category
+    ->setId(336)
+    ->setCreatedAt('2014-06-23 09:50:07')
+    ->setName('Category with icon including media path')
+    ->setParentId(333)
+    ->setPath('1/2/333/335')
+    ->setLevel(4)
+    ->setAvailableSortBy('name')
+    ->setDefaultSortBy('name')
+    ->setIsActive(true)
+    ->setPosition(1)
+    ->setAvailableSortBy(['position'])
+    ->setIncludeInMenu(0)
+    ->setCategoryIcon('/media/catalog/category/icon.png')
+    ->save();
