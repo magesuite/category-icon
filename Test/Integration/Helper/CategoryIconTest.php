@@ -74,7 +74,7 @@ class CategoryIconTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals('/media/catalog/category/icon.png', $category->getCategoryIcon());
         $this->assertEquals(
-            'http://localhost/media/catalog/category/icon.png',
+            'http://localhost/pub/media/catalog/category/icon.png',
             $this->categoryHelper->getUrl($category)
         );
     }
