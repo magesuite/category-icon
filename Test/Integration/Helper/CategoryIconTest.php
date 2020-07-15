@@ -59,4 +59,23 @@ class CategoryIconTest extends \PHPUnit\Framework\TestCase
             $this->categoryHelper->getUrl($category)
         );
     }
+
+    /**
+     * @magentoAppArea frontend
+     * @magentoDbIsolation enabled
+     * @magentoAppIsolation enabled
+     * @magentoDataFixture loadCategoriesFixture
+     */
+    public function testItReturnsCategoryIconWhenMediaPathIsIncludedInAttribute()
+    {
+        $categoryId = 336;
+
+        $category = $this->categoryRepository->get($categoryId);
+
+        $this->assertEquals('/media/catalog/category/icon.png', $category->getCategoryIcon());
+        $this->assertEquals(
+            'http://localhost/media/catalog/category/icon.png',
+            $this->categoryHelper->getUrl($category)
+        );
+    }
 }

@@ -41,7 +41,16 @@ class CategoryIcon extends \Magento\Framework\App\Helper\AbstractHelper
         return $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
     }
 
-    protected function buildUrl($imagePath) {
+    protected function getBaseUrl()
+    {
+        return $this->storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB);
+    }
+
+    protected function buildUrl($imagePath)
+    {
+        $imagePath = ltrim($imagePath, '/');
+        $imagePath = str_replace('media/catalog/category/', '', $imagePath);
+
         return $this->getBaseMediaUrl() . 'catalog/category/' . $imagePath;
     }
 }
