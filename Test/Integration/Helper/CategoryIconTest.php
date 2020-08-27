@@ -23,7 +23,7 @@ class CategoryIconTest extends \PHPUnit\Framework\TestCase
      */
     protected $categoryHelper;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->objectManager = \Magento\TestFramework\ObjectManager::getInstance();
 
