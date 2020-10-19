@@ -78,4 +78,25 @@ class CategoryIconTest extends \PHPUnit\Framework\TestCase
             $this->categoryHelper->getUrl($category)
         );
     }
+
+    /**
+     * @magentoAppArea frontend
+     * @magentoDbIsolation enabled
+     * @magentoAppIsolation enabled
+     * @magentoDataFixture loadCategoriesFixture
+     */
+    public function testItReturnsCategoryIconMimeType()
+    {
+        $categoryId = 337;
+
+        $category = $this->categoryRepository->get($categoryId);
+
+        $this->assertEquals('image/jpeg', $this->categoryHelper->getMimeType($category));
+
+        $categoryId = 338;
+
+        $category = $this->categoryRepository->get($categoryId);
+
+        $this->assertEquals('image/svg', $this->categoryHelper->getMimeType($category));
+    }
 }
