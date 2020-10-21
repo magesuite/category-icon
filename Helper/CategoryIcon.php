@@ -8,10 +8,17 @@ class CategoryIcon extends \Magento\Framework\App\Helper\AbstractHelper
      * @var \Magento\Store\Model\StoreManagerInterface
      */
     protected $storeManager;
+    /**
+     * @var \Magento\Framework\Filesystem
+     */
+    protected $directory;
 
-    public function __construct(\Magento\Store\Model\StoreManagerInterface $storeManager)
-    {
+    public function __construct(
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Framework\Filesystem $filesystem
+    ) {
         $this->storeManager = $storeManager;
+        $this->directory = $filesystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::PUB);
     }
 
     /**
@@ -52,5 +59,18 @@ class CategoryIcon extends \Magento\Framework\App\Helper\AbstractHelper
         $imagePath = str_replace('media/catalog/category/', '', $imagePath);
 
         return $this->getBaseMediaUrl() . 'catalog/category/' . $imagePath;
+    }
+
+    public function getMimeType(\Magento\Catalog\Model\Category $category)
+    {
+        $categoryIcon = $category->getCategoryIcon();
+
+        if (empty($categoryIcon)) {
+            return null;
+        }
+
+        $rootDirectory = $this->directory->getAbsolutePath();
+
+        return mime_content_type(rtrim($rootDirectory, '/') . $categoryIcon);
     }
 }
