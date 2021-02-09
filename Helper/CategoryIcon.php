@@ -70,7 +70,12 @@ class CategoryIcon extends \Magento\Framework\App\Helper\AbstractHelper
         }
 
         $rootDirectory = $this->directory->getAbsolutePath();
+        $categoryPath = '/media/catalog/category/';
 
-        return mime_content_type(rtrim($rootDirectory, '/') . $categoryIcon);
+        if (strpos($categoryIcon, $categoryPath) === false) {
+            $categoryIcon = $categoryPath . $categoryIcon;
+        }
+
+        return mime_content_type($rootDirectory . $categoryIcon);
     }
 }
