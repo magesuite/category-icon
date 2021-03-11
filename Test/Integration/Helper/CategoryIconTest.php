@@ -33,12 +33,12 @@ class CategoryIconTest extends \PHPUnit\Framework\TestCase
 
     public static function loadCategoriesFixture()
     {
-        require __DIR__.'/../_files/categories.php';
+        require __DIR__ . '/../_files/categories.php';
     }
 
     public static function loadCategoriesFixtureRollback()
     {
-        require __DIR__.'/../_files/categories_rollback.php';
+        require __DIR__ . '/../_files/categories_rollback.php';
     }
 
     /**
@@ -50,13 +50,15 @@ class CategoryIconTest extends \PHPUnit\Framework\TestCase
     public function testItReturnsCategoryIcon()
     {
         $categoryId = 335;
-
         $category = $this->categoryRepository->get($categoryId);
 
         $this->assertEquals('icon.png', $category->getCategoryIcon());
+
+        $url = $this->categoryHelper->getUrl($category);
+        $url = str_replace('pub/', '', $url);
         $this->assertEquals(
-            'http://localhost/pub/media/catalog/category/icon.png',
-            $this->categoryHelper->getUrl($category)
+            'http://localhost/media/catalog/category/icon.png',
+            $url
         );
     }
 
@@ -69,13 +71,15 @@ class CategoryIconTest extends \PHPUnit\Framework\TestCase
     public function testItReturnsCategoryIconWhenMediaPathIsIncludedInAttribute()
     {
         $categoryId = 336;
-
         $category = $this->categoryRepository->get($categoryId);
 
         $this->assertEquals('/media/catalog/category/icon.png', $category->getCategoryIcon());
+
+        $url = $this->categoryHelper->getUrl($category);
+        $url = str_replace('pub/', '', $url);
         $this->assertEquals(
-            'http://localhost/pub/media/catalog/category/icon.png',
-            $this->categoryHelper->getUrl($category)
+            'http://localhost/media/catalog/category/icon.png',
+            $url
         );
     }
 
@@ -88,13 +92,11 @@ class CategoryIconTest extends \PHPUnit\Framework\TestCase
     public function testItReturnsCategoryIconMimeType()
     {
         $categoryId = 337;
-
         $category = $this->categoryRepository->get($categoryId);
 
         $this->assertEquals('image/jpeg', $this->categoryHelper->getMimeType($category));
 
         $categoryId = 338;
-
         $category = $this->categoryRepository->get($categoryId);
 
         $this->assertEquals('image/svg', $this->categoryHelper->getMimeType($category));
