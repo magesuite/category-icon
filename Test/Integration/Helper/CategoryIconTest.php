@@ -99,6 +99,8 @@ class CategoryIconTest extends \PHPUnit\Framework\TestCase
         $categoryId = 338;
         $category = $this->categoryRepository->get($categoryId);
 
-        $this->assertEquals('image/svg', $this->categoryHelper->getMimeType($category));
+        if(!in_array($this->categoryHelper->getMimeType($category), ['image/svg', 'image/svg+xml'])) {
+            $this->fail('Mime type must be either image/svg or image/svg+xml');
+        }
     }
 }
