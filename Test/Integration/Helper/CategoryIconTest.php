@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MageSuite\CategoryIcon\Test\Integration\Helper;
 
 /**
@@ -8,20 +10,11 @@ namespace MageSuite\CategoryIcon\Test\Integration\Helper;
  */
 class CategoryIconTest extends \PHPUnit\Framework\TestCase
 {
-    /**
-     * @var \Magento\TestFramework\ObjectManager
-     */
-    protected $objectManager;
+    protected \Magento\Framework\App\ObjectManager $objectManager;
 
-    /**
-     * @var \Magento\Catalog\Api\CategoryRepositoryInterface
-     */
-    protected $categoryRepository;
+    protected \Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository;
 
-    /**
-     * @var \MageSuite\CategoryIcon\Helper\CategoryIcon
-     */
-    protected $categoryHelper;
+    protected \MageSuite\CategoryIcon\Helper\CategoryIcon $categoryHelper;
 
     public function setUp(): void
     {
@@ -31,23 +24,13 @@ class CategoryIconTest extends \PHPUnit\Framework\TestCase
         $this->categoryRepository = $this->objectManager->create(\Magento\Catalog\Api\CategoryRepositoryInterface::class);
     }
 
-    public static function loadCategoriesFixture()
-    {
-        require __DIR__ . '/../_files/categories.php';
-    }
-
-    public static function loadCategoriesFixtureRollback()
-    {
-        require __DIR__ . '/../_files/categories_rollback.php';
-    }
-
     /**
      * @magentoAppArea frontend
      * @magentoDbIsolation enabled
      * @magentoAppIsolation enabled
-     * @magentoDataFixture loadCategoriesFixture
+     * @magentoDataFixture MageSuite_CategoryIcon::Test/Integration/_files/categories.php
      */
-    public function testItReturnsCategoryIcon()
+    public function testItReturnsCategoryIcon(): void
     {
         $categoryId = 335;
         $category = $this->categoryRepository->get($categoryId);
@@ -66,9 +49,9 @@ class CategoryIconTest extends \PHPUnit\Framework\TestCase
      * @magentoAppArea frontend
      * @magentoDbIsolation enabled
      * @magentoAppIsolation enabled
-     * @magentoDataFixture loadCategoriesFixture
+     * @magentoDataFixture MageSuite_CategoryIcon::Test/Integration/_files/categories.php
      */
-    public function testItReturnsCategoryIconWhenMediaPathIsIncludedInAttribute()
+    public function testItReturnsCategoryIconWhenMediaPathIsIncludedInAttribute(): void
     {
         $categoryId = 336;
         $category = $this->categoryRepository->get($categoryId);
@@ -87,9 +70,9 @@ class CategoryIconTest extends \PHPUnit\Framework\TestCase
      * @magentoAppArea frontend
      * @magentoDbIsolation enabled
      * @magentoAppIsolation enabled
-     * @magentoDataFixture loadCategoriesFixture
+     * @magentoDataFixture MageSuite_CategoryIcon::Test/Integration/_files/categories.php
      */
-    public function testItReturnsCategoryIconMimeType()
+    public function testItReturnsCategoryIconMimeType(): void
     {
         $categoryId = 337;
         $category = $this->categoryRepository->get($categoryId);
