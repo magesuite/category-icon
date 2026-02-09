@@ -10,16 +10,13 @@ namespace MageSuite\CategoryIcon\Test\Integration\Helper;
  */
 class CategoryIconTest extends \PHPUnit\Framework\TestCase
 {
-    protected \Magento\Framework\App\ObjectManager $objectManager;
-
-    protected \Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository;
-
-    protected \MageSuite\CategoryIcon\Helper\CategoryIcon $categoryHelper;
+    protected ?\Magento\Framework\App\ObjectManager $objectManager;
+    protected ?\Magento\Catalog\Api\CategoryRepositoryInterface $categoryRepository;
+    protected ?\MageSuite\CategoryIcon\Helper\CategoryIcon $categoryHelper;
 
     public function setUp(): void
     {
         $this->objectManager = \Magento\TestFramework\ObjectManager::getInstance();
-
         $this->categoryHelper = $this->objectManager->get(\MageSuite\CategoryIcon\Helper\CategoryIcon::class);
         $this->categoryRepository = $this->objectManager->create(\Magento\Catalog\Api\CategoryRepositoryInterface::class);
     }
